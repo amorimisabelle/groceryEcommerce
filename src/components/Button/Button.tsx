@@ -2,13 +2,14 @@ import { StyledButton } from './Button.styles';
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'sliderArrow';
+  disabled?: boolean;
   onClick?: () => void;
 }
 
-const Button = ({ children, variant = 'primary', onClick }: ButtonProps) => {
+const Button = ({ children, variant, disabled = false, onClick }: ButtonProps) => {
   return (
-    <StyledButton variant={variant} onClick={onClick}>
+    <StyledButton variant={variant} disabled={disabled} onClick={onClick}>
       {children}
     </StyledButton>
   );

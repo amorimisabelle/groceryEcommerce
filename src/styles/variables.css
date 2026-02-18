@@ -21,6 +21,17 @@
   --warning-hover: #d97706;
   --warning-light: #fef3c7;
 
+  --bg-card-color-0: #feefea;
+  --bg-card-color-1: #fff3ff;
+  --bg-card-color-2: #f2fce4;
+  --bg-card-color-3: #ecffec;
+  --bg-card-color-4: #fffceb;
+  --bg-card-color-5: #def9ec;
+  --bg-card-color-neutral: #f4f6fa;
+
+  --bg-card-color-largeSize-1: #d2efe1;
+  --bg-card-color-largeSize-2: #fff5e1;
+
   /* ===== NEUTROS ===== */
   --white: #ffffff;
   --gray-50: #f9fafb;

@@ -15,17 +15,10 @@ import {
 } from 'lucide-react';
 import Button from '../Button/Button';
 
+import { PRODUCT_CATEGORIES } from '../../types/categories';
+
 const Header = () => {
-  const selectOptions = [
-    'Vegetables',
-    'Fruits',
-    'Grains',
-    'Proteins',
-    'Dairy',
-    'Cooffe & Teas',
-    'Meat',
-    'Beverages',
-  ];
+  const selectOptions = PRODUCT_CATEGORIES;
 
   return (
     <StyledHeader>
