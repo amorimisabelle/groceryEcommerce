@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ProductCategorisTemplate = styled.section`
-  padding: 6rem 0;
+  padding: 6rem 0 0;
 
   .templateHeader {
     display: flex;

@@ -72,14 +72,13 @@ const Home = () => {
         onCategorySelect={(category) => handleCategorySelect(category, 'featuredProducts')}
         productsList={currentProducts}
       />
-      <div className="flex flex-row gap-2">
+      <div className="flex gap-6 w-[90%] mx-auto! mt-24!">
         <BannerTemplate
           title="Free delivery over $50"
           variant="primary"
           tagText="Free delivery"
           text="Shop $50 product and get free delivery anywhre."
           buttonText="Shop Now"
-          img=""
         />
         <BannerTemplate
           title="Free delivery over $50"
@@ -89,6 +88,12 @@ const Home = () => {
           buttonText="Shop Now"
         />
       </div>
+      <ProductCardTemplate
+        title="Featured Products"
+        cardType="price&stock"
+        onCategorySelect={(category) => handleCategorySelect(category, 'featuredProducts')}
+        productsList={currentProducts}
+      />
     </>
   );
 };

@@ -1,5 +1,7 @@
 import ReactStars from 'react-stars';
 import { ProductCardTemplate } from './ProductCard.styles';
+import Button from '../../Button/Button';
+import { ShoppingCart } from 'lucide-react';
 
 interface ProductCardProps {
   type?: 'categories' | 'price' | 'price&stock';
@@ -46,12 +48,6 @@ const ProductCard = ({
           />
         )}
         {brand && type !== 'categories' && <p className="brand">By {brand}</p>}
-        {price && type !== 'categories' && (
-          <div className="flex gap-2 items-center price">
-            <p>${specialPrice}</p>
-            <p>{price}</p>
-          </div>
-        )}
         {type === 'categories' ? (
           <p>
             {currentStock} {currentStock > 1 ? 'Items' : 'Item'}
@@ -64,6 +60,24 @@ const ProductCard = ({
               </p>
             </div>
           )
+        )}
+        <div className="flex justify-between items-center">
+          {price && type !== 'categories' && (
+            <div className="flex gap-2 items-center price">
+              <p>${specialPrice}</p>
+              <p>{price}</p>
+            </div>
+          )}
+          {type === 'price' && (
+            <Button variant="secondary">
+              <ShoppingCart /> Add
+            </Button>
+          )}
+        </div>
+        {type === 'price&stock' && (
+          <Button variant="primary">
+            <ShoppingCart /> Add
+          </Button>
         )}
       </ProductCardTemplate>
     </>

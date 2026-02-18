@@ -96,6 +96,7 @@ export const ProductCardTemplate = styled.div<ProductCardTemplateProps>`
     if (props.type === 'price') {
       return css`
         ${priceStyles}
+        padding: 1rem;
         background-color: transparent;
       `;
     }

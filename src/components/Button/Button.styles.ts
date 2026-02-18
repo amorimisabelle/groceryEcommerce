@@ -31,7 +31,8 @@ export const StyledButton = styled.button<ButtonProps>`
           background: var(--gray-50);
           border: none;
           color: var(--primary-color);
-          border-radius: 50px;
+          padding: 8px 16px;
+          border-radius: 4px;
           &:hover {
             background: var(--gray-100);
           }

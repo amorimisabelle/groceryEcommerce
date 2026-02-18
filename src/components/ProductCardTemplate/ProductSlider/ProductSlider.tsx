@@ -31,7 +31,7 @@ const ProductSlider = ({ products, itemsPerPage, cardType }: ProductSliderProps)
   return (
     <ProductSliderContainer>
       <div className="product-slider-container">
-        {totalPages > 1 && (
+        {totalPages > 1 && cardType === 'categories' && (
           <Button variant="sliderArrow" onClick={goToPrev} disabled={currentPage === 0}>
             <ArrowLeft />
           </Button>
@@ -52,7 +52,7 @@ const ProductSlider = ({ products, itemsPerPage, cardType }: ProductSliderProps)
             currentStock={product.currentStock}
           />
         ))}
-        {totalPages > 1 && (
+        {totalPages > 1 && cardType === 'categories' && (
           <Button
             variant="sliderArrow"
             onClick={goToNext}

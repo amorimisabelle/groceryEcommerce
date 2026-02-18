@@ -8,7 +8,6 @@ interface IBannerProps {
 const BannerTemplateStyle = styled.div<IBannerProps>`
   display: flex;
   justify-content: space-between;
-  width: auto;
   background-size: contain;
 
   div {
