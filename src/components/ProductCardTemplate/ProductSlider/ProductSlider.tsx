@@ -12,7 +12,7 @@ interface ProductSliderProps {
   cardType?: 'categories' | 'price' | 'price&stock';
 }
 
-const ProductSlider = ({ products, itemsPerPage, cardType }: ProductSliderProps) => {
+const ProductSlider = ({ products, itemsPerPage = 5, cardType }: ProductSliderProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
@@ -29,29 +29,33 @@ const ProductSlider = ({ products, itemsPerPage, cardType }: ProductSliderProps)
   };
 
   return (
-    <ProductSliderContainer>
+    <ProductSliderContainer type={cardType ? cardType : 'categories'}>
       <div className="product-slider-container">
         {totalPages > 1 && cardType === 'categories' && (
           <Button variant="sliderArrow" onClick={goToPrev} disabled={currentPage === 0}>
             <ArrowLeft />
           </Button>
         )}
-        {visibleProducts.map((product, index) => (
-          <ProductCard
-            key={startIndex + index}
-            name={product.name}
-            category={product.category}
-            rate={product.rate}
-            brand={product.brand}
-            price={product.price}
-            specialPrice={product.specialPrice}
-            image={productImage}
-            index={startIndex + index}
-            type={cardType}
-            initialStock={product.initialStock}
-            currentStock={product.currentStock}
-          />
-        ))}
+        {visibleProducts.length > 0 ? (
+          visibleProducts.map((product, index) => (
+            <ProductCard
+              key={startIndex + index}
+              name={product.name}
+              category={product.category}
+              rate={product.rate}
+              brand={product.brand}
+              price={product.price}
+              specialPrice={product.specialPrice}
+              image={productImage}
+              index={startIndex + index}
+              type={cardType}
+              initialStock={product.initialStock}
+              currentStock={product.currentStock}
+            />
+          ))
+        ) : (
+          <h3 className="text-center mx-auto text-(--gray-500)">Nenhum produto encontrado</h3>
+        )}
         {totalPages > 1 && cardType === 'categories' && (
           <Button
             variant="sliderArrow"

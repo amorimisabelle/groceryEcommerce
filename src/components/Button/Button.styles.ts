@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'sliderArrow';
+  variant?: 'primary' | 'secondary' | 'sliderArrow' | 'priceCard' | 'fullWidth';
   disabled: boolean;
 }
 
@@ -49,6 +49,28 @@ export const StyledButton = styled.button<ButtonProps>`
             background: var(--gray-100);
           }
         `;
+      case 'priceCard':
+        return css`
+          padding: 0.5rem;
+          background: var(--primary-light);
+          color: var(--primary-color);
+          &:hover {
+            background: var(--primary-hover);
+          }
+          font-size: 0.88rem;
+        `;
+      case 'fullWidth':
+        return css`
+          padding: 0.5rem 24px;
+          justify-content: center;
+          background: var(--primary-color);
+          color: white;
+          &:hover {
+            background: var(--primary-hover);
+          }
+          min-width: 100%;
+          font-size: 0.88rem;
+        `;
     }
 
     switch (props.disabled) {
@@ -58,16 +80,6 @@ export const StyledButton = styled.button<ButtonProps>`
           color: white;
           &:hover {
             background: var(--primary-hover);
-          }
-        `;
-      case false:
-        return css`
-          background: var(--gray-50);
-          border: none;
-          color: var(--primary-color);
-          border-radius: 50px;
-          &:hover {
-            background: var(--gray-100);
           }
         `;
     }

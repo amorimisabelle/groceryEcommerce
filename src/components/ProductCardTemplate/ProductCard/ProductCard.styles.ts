@@ -17,9 +17,25 @@ const categoriesStyles = css`
   }
 `;
 
-const priceStyles = css``;
+const priceStyles = css`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.8rem;
+`;
 
-const priceStockStyles = css``;
+const priceStockStyles = css`
+  min-height: 388px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.8rem;
+
+  .stockText {
+    font-size: var(--font-size-xs) !important;
+  }
+`;
 
 const mediumStyles = css``;
 
@@ -34,20 +50,38 @@ export const ProductCardTemplate = styled.div<ProductCardTemplateProps>`
   h3 {
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 4px;
     color: var(--black);
   }
 
   h4 {
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 300;
     margin-bottom: 4px;
   }
 
   img {
-    width: 100%;
-    max-height: 50%;
+    min-width: 100%;
+    max-height: 154px;
     object-fit: contain;
+  }
+
+  div:first-child {
+    position: relative;
+    width: 100%;
+  }
+
+  .tag {
+    display: inline-block;
+    position: absolute;
+    top: -11px;
+    left: -11px;
+    background: var(--warning-light);
+    color: var(--warning-color);
+    font-size: var(--font-size-sm) !important;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 4px 8px;
+    z-index: 1;
   }
 
   .brand {
