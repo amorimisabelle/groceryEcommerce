@@ -6,8 +6,8 @@ export const HeroBanner = styled.div`
   display: flex;
   gap: 4rem;
   align-items: center;
-  padding: 0 4rem;
-  height: 35vh;
+  padding: 4rem;
+  min-height: 45vh;
   background-color: rgba(197, 234, 217, 0.75);
   background:
     url(${heroImg}) top right no-repeat,

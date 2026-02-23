@@ -69,6 +69,10 @@ a:hover {
   color: var(--primary-hover);
 }
 
+small {
+  font-size: var(--font-size-xs);
+}
+
 /* ===== BOTÕES BASE ===== */
 button {
   font-family: inherit;
@@ -161,6 +165,11 @@ select:focus {
 }
 .bg-warning {
   background-color: var(--warning-color);
+}
+
+.bg-vegs-pattern {
+  background: url('../../assets/images/vegs-pattern.png') center repeat;
+  background-size: contain;
 }
 
 /* ===== RESPONSIVIDADE ===== */

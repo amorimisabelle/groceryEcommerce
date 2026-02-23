@@ -1,18 +1,19 @@
 import Header from '../../components/Header/Header';
-import Button from '../../components/Button/Button';
 import { HeroBanner } from './Home.styles';
-import { Send } from 'lucide-react';
 import ProductCardTemplate from '../../components/ProductCardTemplate/ProductCardTemplate';
 import { useState } from 'react';
 import { PRODUCT_CATEGORIES, type ProductCategory } from '../../types/categories';
 import type { IProduct, IProductsGroups } from '../../types/product';
 import productsLists from '../../mocks/products';
 import { BannerTemplate } from '../../components/Banner/BannerTemplate';
+import Input from '../../components/Input/Input';
+import TopRank from '../../components/TopRank/TopRank';
+import { TOPRANK_CATEGORIES, type TopRankCategory } from '../../mocks/categories';
 
 const Home = () => {
   const { productsNamesList, allProductsList } = productsLists;
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [currentList, setCurrentList] = useState<string>('');
+  const [currentList, setCurrentList] = useState<string>('All');
 
   // Seta qual categoria é selecionada baseada no tipo de lista
   const handleCategorySelect = (category: string, listType: string) => {
@@ -29,15 +30,44 @@ const Home = () => {
 
     if (currentList === 'exploreCategories') {
       const group = productsNamesList.find((group) => group.category === category);
+
       return group?.products;
     }
 
     if (currentList === 'featuredProducts') {
-      const productsByCategory = productsNamesList.find((group) => group.category === category);
+      const productsByCategory = allProductsList.find((group) => group.category === category);
       return productsByCategory?.products;
     }
 
     return undefined;
+  };
+
+  const getTopRanked = (
+    allProducts: { category: string; products: IProduct[] }[],
+    rankType: TopRankCategory
+  ) => {
+    // Combinar todos os produtos de todas as categorias
+    const allProductsCombined = allProducts.flatMap(
+      (category: { category: string; products: IProduct[] }) => category.products
+    );
+
+    const topRankedProducts = allProductsCombined.sort((a: IProduct, b: IProduct) => {
+      if (rankType === 'Top Rated') {
+        return b.rate - a.rate;
+      }
+
+      if (rankType === 'Top Sells') {
+        return (b.currentStock * 100) / b.initialStock - (a.currentStock * 100) / a.initialStock;
+      }
+
+      if (rankType === 'Recently Added') {
+        return new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime();
+      }
+
+      return (b.currentStock * 100) / b.initialStock - (a.currentStock * 100) / a.initialStock;
+    });
+
+    return topRankedProducts;
   };
 
   const currentProducts: IProduct[] | IProductsGroups[] = selectedCategory
@@ -48,27 +78,30 @@ const Home = () => {
     <>
       <Header />
       <HeroBanner className="hero-bg">
-        <article className="text-left">
-          <div className="flex flex-col gap-8 pb-12! xl:w-[65%]">
+        <article className="text-left w-6/12">
+          <div className="flex flex-col gap-8 pb-12!">
             <h1>Don't miss our daily amazing deals.</h1>
             <p>Save up to 60% off on your first order</p>
           </div>
-          <div className="flex items-center gap-1 bg-(--gray-100) rounded-md w-fit pl-4!">
-            <Send width={18} />
-            <input type="text" placeholder="Enter your email address" />
-            <Button>Subscribe</Button>
-          </div>
+          <Input
+            icon="send"
+            placeholder="Enter your email address"
+            required={true}
+            buttonText="Subscribe"
+          />
         </article>
       </HeroBanner>
       <ProductCardTemplate
         title="Explore Categories"
         cardType="categories"
+        selectedCategory={selectedCategory as ProductCategory}
         onCategorySelect={(category) => handleCategorySelect(category, 'exploreCategories')}
         productsList={currentProducts}
       />
       <ProductCardTemplate
         title="Featured Products"
         cardType="price"
+        selectedCategory={selectedCategory as ProductCategory}
         onCategorySelect={(category) => handleCategorySelect(category, 'featuredProducts')}
         productsList={currentProducts}
       />
@@ -81,19 +114,30 @@ const Home = () => {
           buttonText="Shop Now"
         />
         <BannerTemplate
-          title="Free delivery over $50"
+          title="Organic Food"
           variant="secondary"
-          tagText="Free delivery"
-          text="Shop $50 product and get free delivery anywhre."
-          buttonText="Shop Now"
+          tagText="60% off"
+          text="Save up to 60% off on your first order"
+          buttonText="Order Now"
         />
       </div>
       <ProductCardTemplate
-        title="Featured Products"
+        title="Daily Best Sells"
         cardType="price&stock"
-        onCategorySelect={(category) => handleCategorySelect(category, 'featuredProducts')}
+        selectedCategory={selectedCategory as ProductCategory}
+        onCategorySelect={(category) => handleCategorySelect(category, 'price&stock')}
         productsList={currentProducts}
       />
+      <section className="lg:w-11/12 mx-auto! flex! gap-20 mt-20!">
+        {TOPRANK_CATEGORIES.map((category: string) => {
+          return (
+            <TopRank
+              productsList={getTopRanked(allProductsList, category as TopRankCategory)}
+              title={category}
+            />
+          );
+        })}
+      </section>
     </>
   );
 };

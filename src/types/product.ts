@@ -8,6 +8,7 @@ export interface IProduct {
   rate: number;
   initialStock: number;
   currentStock: number;
+  createdDate: string;
 }
 
 // Seleciona só as propriedades que queremos

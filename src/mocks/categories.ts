@@ -9,7 +9,15 @@ export const PRODUCT_CATEGORIES = [
   'Beverages',
 ] as const;
 
+export const TOPRANK_CATEGORIES = [
+  'Top Sells',
+  'Top Rated',
+  'Trending Items',
+  'Recently Added',
+] as const;
+
 export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
+export type TopRankCategory = (typeof TOPRANK_CATEGORIES)[number];
 
 // Para uso em selects/dropdowns
 export const CATEGORY_OPTIONS = [
